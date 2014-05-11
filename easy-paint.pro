@@ -10,3 +10,5 @@ INCLUDEPATH += .
 # Input
 HEADERS += mainwindow.h scribblearea.h
 SOURCES += main.cpp mainwindow.cpp scribblearea.cpp
+
+CONFIG += static
