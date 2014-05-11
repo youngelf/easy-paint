@@ -63,8 +63,8 @@ void MainWindow::closeEvent(QCloseEvent * event) {
 		event->accept();
 	} else {
 		event->ignore();
-        scribbleArea->grabKeyboard();
 	}
+    scribbleArea->grabKeyboard();
 }
 
 void MainWindow::open() {
