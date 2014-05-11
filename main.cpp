@@ -42,14 +42,13 @@
 
 #include "mainwindow.h"
 
-int main(int argc, char *argv[])
-{
-    QApplication app(argc, argv);
-    MainWindow window;
+int main(int argc, char *argv[]) {
+	QApplication app(argc, argv);
+	MainWindow window;
 #if defined(Q_OS_SYMBIAN)
-    window.showMaximized();
+	window.showMaximized();
 #else
-    window.show();
+	window.show();
 #endif
-    return app.exec();
+	return app.exec();
 }
