@@ -161,21 +161,3 @@ void ScribbleArea::resizeImage(QImage * image, const QSize & newSize) {
 	painter.drawImage(QPoint(0, 0), *image);
 	*image = newImage;
 }
-
-void ScribbleArea::print() {
-#ifndef QT_NO_PRINTER
-	QPrinter printer(QPrinter::HighResolution);
-
-	QPrintDialog *printDialog = new QPrintDialog(&printer, this);
-	if (printDialog->exec() == QDialog::Accepted) {
-		QPainter painter(&printer);
-		QRect rect = painter.viewport();
-		QSize size = image.size();
-		size.scale(rect.size(), Qt::KeepAspectRatio);
-		painter.setViewport(rect.x(), rect.y(), size.width(),
-				    size.height());
-		painter.setWindow(image.rect());
-		painter.drawImage(0, 0, image);
-	}
-#endif				// QT_NO_PRINTER
-}

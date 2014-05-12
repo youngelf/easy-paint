@@ -43,6 +43,8 @@
 
 #include <QList>
 #include <QMainWindow>
+#include <QtCore>
+#include <QtWidgets>
 
 class ScribbleArea;
 

@@ -46,6 +46,7 @@
 #include <QPoint>
 #include <QWidget>
 #include <QDebug>
+#include <QtPrintSupport/QtPrintSupport>
 
 class ScribbleArea:public QWidget {
  Q_OBJECT public:
@@ -58,12 +59,16 @@ class ScribbleArea:public QWidget {
 
 	bool isModified() const {
 		return modified;
-	} QColor penColor() const {
+    }
+    QColor penColor() const {
 		return myPenColor;
-	} int penWidth() const {
+    }
+    int penWidth() const {
 		return myPenWidth;
-	} public slots:void clearImage();
-	void print();
+    }
+
+ public slots:
+    void clearImage();
 
  protected:
 	void mousePressEvent(QMouseEvent * event);

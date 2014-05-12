@@ -55,8 +55,7 @@ MainWindow::MainWindow() {
 
     QMainWindow::showFullScreen();
 
-	setWindowTitle(tr("Scribble"));
-	resize(500, 500);
+    setWindowTitle(tr("Easy Paint"));
 }
 
 void MainWindow::closeEvent(QCloseEvent * event) {
@@ -93,7 +92,7 @@ void MainWindow::penColor() {
 
 void MainWindow::penWidth() {
 	bool ok;
-	int newWidth = QInputDialog::getInteger(this, tr("Scribble"),
+    int newWidth = QInputDialog::getInt(this, tr("Scribble"),
 						tr("Select pen width:"),
 						scribbleArea->penWidth(),
 						1, 50, 1, &ok);
@@ -111,19 +110,10 @@ void MainWindow::toggleMenu() {
 }
 
 void MainWindow::about() {
-	QMessageBox::about(this, tr("About Scribble"),
+    QMessageBox::about(this, tr("About Easy Paint"),
 			   tr
-			   ("<p>The <b>Scribble</b> example shows how to use QMainWindow as the "
-			    "base widget for an application, and how to reimplement some of "
-			    "QWidget's event handlers to receive the events generated for "
-			    "the application's widgets:</p><p> We reimplement the mouse event "
-			    "handlers to facilitate drawing, the paint event handler to "
-			    "update the application and the resize event handler to optimize "
-			    "the application's appearance. In addition we reimplement the "
-			    "close event handler to intercept the close events before "
-			    "terminating the application.</p><p> The example also demonstrates "
-			    "how to use QPainter to draw an image in real time, as well as "
-			    "to repaint widgets.</p>"));
+               ("<p><b>Easy Paint</b> is a simple program to allow a child"
+                " to use a mouse.</p>"));
 }
 
 void MainWindow::createActions() {
@@ -139,9 +129,6 @@ void MainWindow::createActions() {
 		connect(action, SIGNAL(triggered()), this, SLOT(save()));
 		saveAsActs.append(action);
 	}
-
-	printAct = new QAction(tr("&Print..."), this);
-	connect(printAct, SIGNAL(triggered()), scribbleArea, SLOT(print()));
 
 	exitAct = new QAction(tr("E&xit"), this);
 	exitAct->setShortcuts(QKeySequence::Quit);
@@ -185,7 +172,6 @@ void MainWindow::createMenus() {
 	fileMenu = new QMenu(tr("&File"), this);
 	fileMenu->addAction(openAct);
 	fileMenu->addMenu(saveAsMenu);
-	fileMenu->addAction(printAct);
 	fileMenu->addSeparator();
 	fileMenu->addAction(exitAct);
 
@@ -206,7 +192,7 @@ void MainWindow::createMenus() {
 bool MainWindow::maybeSave() {
 	if (scribbleArea->isModified()) {
 		QMessageBox::StandardButton ret;
-		ret = QMessageBox::warning(this, tr("Scribble"),
+        ret = QMessageBox::warning(this, tr("Easy Paint"),
 					   tr("The image has been modified.\n"
 					      "Do you want to save your changes?"),
 					   QMessageBox::Save | QMessageBox::
@@ -221,7 +207,7 @@ bool MainWindow::maybeSave() {
 }
 
 bool MainWindow::saveFile(const QByteArray & fileFormat) {
-	QString initialPath = QDir::currentPath() + "/untitled." + fileFormat;
+    QString initialPath = QDir::currentPath() + "/easy-p1." + fileFormat;
 
 	QString fileName = QFileDialog::getSaveFileName(this, tr("Save As"),
 							initialPath,

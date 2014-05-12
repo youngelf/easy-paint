@@ -3,9 +3,11 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET = 
+TARGET = easy-paint
 DEPENDPATH += .
 INCLUDEPATH += .
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 # Input
 HEADERS += mainwindow.h scribblearea.h
