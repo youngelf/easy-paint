@@ -46,7 +46,7 @@
 #include <QPoint>
 #include <QWidget>
 #include <QDebug>
-#include <QtPrintSupport/QtPrintSupport>
+
 
 class ScribbleArea:public QWidget {
  Q_OBJECT public:
