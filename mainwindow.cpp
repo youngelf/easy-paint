@@ -147,6 +147,10 @@ void MainWindow::createActions() {
 	exitAct->setShortcuts(QKeySequence::Quit);
 	connect(exitAct, SIGNAL(triggered()), this, SLOT(close()));
 
+    clearAct = new QAction(tr("C&lear Screen"), this);
+    clearAct->setShortcut(tr("Alt+U"));
+    connect(clearAct, SIGNAL(triggered()), scribbleArea, SLOT(clearImage()));
+
 	penColorAct = new QAction(tr("&Pen Color..."), this);
     penColorAct->setShortcut(tr("Ctrl+C"));
     connect(penColorAct, SIGNAL(triggered()), this, SLOT(penColor()));
@@ -170,6 +174,7 @@ void MainWindow::createActions() {
     addAction(toggleMenuAct);
     addAction(penColorAct);
     addAction(penWidthAct);
+    addAction(clearAct);
 }
 
 void MainWindow::createMenus() {

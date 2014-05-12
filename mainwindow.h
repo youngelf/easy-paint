@@ -79,7 +79,8 @@ class MainWindow:public QMainWindow {
 	QAction *exitAct;
 	QAction *penColorAct;
 	QAction *penWidthAct;
-	QAction *printAct;
+    QAction *printAct;
+    QAction *clearAct;
     QAction *toggleMenuAct;
 	QAction *aboutAct;
 	QAction *aboutQtAct;
