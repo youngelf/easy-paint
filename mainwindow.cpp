@@ -47,33 +47,34 @@
 MainWindow::MainWindow() {
 	scribbleArea = new ScribbleArea;
 	setCentralWidget(scribbleArea);
-	scribbleArea->grabKeyboard();
 
 	createActions();
-//    createMenus();
-	QMainWindow::showFullScreen();
+    createMenus();
+    // But hide them by default.
+    menuBar()->hide();
+
+    QMainWindow::showFullScreen();
 
 	setWindowTitle(tr("Scribble"));
 	resize(500, 500);
 }
 
 void MainWindow::closeEvent(QCloseEvent * event) {
-    scribbleArea->releaseKeyboard();
 	if (maybeSave()) {
 		event->accept();
 	} else {
 		event->ignore();
 	}
-    scribbleArea->grabKeyboard();
 }
 
 void MainWindow::open() {
 	if (maybeSave()) {
-		QString fileName = QFileDialog::getOpenFileName(this,
-								tr("Open File"),
-								QDir::
-								currentPath());
-		if (!fileName.isEmpty())
+        QString fileName = QFileDialog::getOpenFileName(
+                    this,
+                    tr("Open File"),
+                    QDir::
+                    currentPath());
+        if (!fileName.isEmpty())
 			scribbleArea->openImage(fileName);
 	}
 }
@@ -98,6 +99,15 @@ void MainWindow::penWidth() {
 						1, 50, 1, &ok);
 	if (ok)
 		scribbleArea->setPenWidth(newWidth);
+}
+
+
+void MainWindow::toggleMenu() {
+    if (menuBar()->isVisible()) {
+     menuBar()->hide();
+    } else {
+        menuBar()->show();
+    }
 }
 
 void MainWindow::about() {
@@ -138,21 +148,28 @@ void MainWindow::createActions() {
 	connect(exitAct, SIGNAL(triggered()), this, SLOT(close()));
 
 	penColorAct = new QAction(tr("&Pen Color..."), this);
-	connect(penColorAct, SIGNAL(triggered()), this, SLOT(penColor()));
+    penColorAct->setShortcut(tr("Ctrl+C"));
+    connect(penColorAct, SIGNAL(triggered()), this, SLOT(penColor()));
 
 	penWidthAct = new QAction(tr("Pen &Width..."), this);
+    penWidthAct->setShortcut(tr("Ctrl+W"));
 	connect(penWidthAct, SIGNAL(triggered()), this, SLOT(penWidth()));
 
-	clearScreenAct = new QAction(tr("&Clear Screen"), this);
-	clearScreenAct->setShortcut(tr("Ctrl+L"));
-	connect(clearScreenAct, SIGNAL(triggered()),
-		scribbleArea, SLOT(clearImage()));
+    toggleMenuAct = new QAction(tr("&Toggle Menu"), this);
+    toggleMenuAct->setShortcut(tr("Ctrl+Alt+T"));
+    connect(toggleMenuAct, SIGNAL(triggered()),
+        this, SLOT(toggleMenu()));
 
 	aboutAct = new QAction(tr("&About"), this);
 	connect(aboutAct, SIGNAL(triggered()), this, SLOT(about()));
 
 	aboutQtAct = new QAction(tr("About &Qt"), this);
 	connect(aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
+
+    // Add these right to the main window.
+    addAction(toggleMenuAct);
+    addAction(penColorAct);
+    addAction(penWidthAct);
 }
 
 void MainWindow::createMenus() {
@@ -171,7 +188,6 @@ void MainWindow::createMenus() {
 	optionMenu->addAction(penColorAct);
 	optionMenu->addAction(penWidthAct);
 	optionMenu->addSeparator();
-	optionMenu->addAction(clearScreenAct);
 
 	helpMenu = new QMenu(tr("&Help"), this);
 	helpMenu->addAction(aboutAct);

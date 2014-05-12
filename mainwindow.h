@@ -53,11 +53,13 @@ class MainWindow:public QMainWindow {
  protected:
 	void closeEvent(QCloseEvent * event);
 
-	private slots: void open();
+    private slots:
+    void open();
 	void save();
 	void penColor();
 	void penWidth();
 	void about();
+    void toggleMenu();
 
  private:
 	void createActions();
@@ -78,7 +80,7 @@ class MainWindow:public QMainWindow {
 	QAction *penColorAct;
 	QAction *penWidthAct;
 	QAction *printAct;
-	QAction *clearScreenAct;
+    QAction *toggleMenuAct;
 	QAction *aboutAct;
 	QAction *aboutQtAct;
 };

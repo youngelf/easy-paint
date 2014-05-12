@@ -179,27 +179,3 @@ void ScribbleArea::print() {
 	}
 #endif				// QT_NO_PRINTER
 }
-
-void ScribbleArea::keyReleaseEvent(QKeyEvent * event)
-{
-    qDebug() << "Got key " << event->modifiers() << " and key " << event->
-        text();
-    if (event->modifiers() & Qt::AltModifier) {
-        // Alt-c clears the image.
-        if (event->text().startsWith("c")) {
-            this->clearImage();
-        }
-        // Alt-b sets the pen color to blue
-        if (event->text().startsWith("b")) {
-            setPenColor(Qt::blue);
-        }
-        // Alt-g sets the pen color to green
-        if (event->text().startsWith("g")) {
-            setPenColor(Qt::green);
-        }
-        // Alt-r sets the pen color to red
-        if (event->text().startsWith("r")) {
-            setPenColor(Qt::red);
-        }
-    }
-}

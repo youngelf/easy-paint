@@ -71,7 +71,6 @@ class ScribbleArea:public QWidget {
 	void mouseReleaseEvent(QMouseEvent * event);
 	void paintEvent(QPaintEvent * event);
 	void resizeEvent(QResizeEvent * event);
-	void keyReleaseEvent(QKeyEvent * event);
 
  private:
 	void drawLineTo(const QPoint & endPoint);
